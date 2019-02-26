@@ -1,0 +1,23 @@
+#!/bin/sh
+
+
+
+echo "Necesito que respondas algunas cosas para saber cuando hacer el comando:  "
+#Recibe los parametros para el comando
+read -p "¿Que día de la semana?" diasemana
+read -p "¿Que mes? (en numero)" mes
+read -p "¿Que dia del mes? " dia
+read -p "¿A que hora? " hora
+read -p "¿En que minuto en especifico?" min
+cls 									##Limpia pantalla
+echo "Ahora, para finalizar... "
+sleep 1
+read -p "Ingrese las instrucciones que quieres hacer " comando  
+echo "$min $hora $dia $mes $diasemana	root $comando" >>/etc/crontab ##Redirecciona los parametros y el comando hacia el crontab
+
+echo "Hecho "
+
+
+
+
+
