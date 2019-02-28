@@ -7,7 +7,7 @@ ayuda()
 	echo 'Este comando te da la descripcion de cada comando'
 
 	echo '¿De que comando quieres ayuda?'
-	echo '1)Login. 2)Fecha. 3)Hora. 4)Buscar. 5)Prompt. 6)PrebePlayer. 7)Tree. 8)Adivina Quien. 9)Cuadro Magico. 10)juegoPuertas. 11)Interfaz Crontab. 12)Creditos.'
+	echo '1)Login. 2)Fecha. 3)Hora. 4)Buscar. 5)Prompt. 6)PrebePlayer. 7)Tree. 8)Adivina Quien. 9)Cuadro Magico. 10)juegoPuertas. 11)Interfaz Crontab. 12)Ayuda. 13)Creditos.'
 	
 	case $1 in:
 		1)
@@ -44,6 +44,9 @@ ayuda()
 			echo 'El comando interfazCrontab.sh te permite asignar tareas a una hora y fecha especifica'
 		;;
 		12)
+			echo 'El comando ayuda.sh te muestra la descripcion de cualquier comando que quieras'
+		;;
+		13)
 			echo 'El comando creditos.sh muestra a los creadores de esta prebeShell'
 		;;
 esac
