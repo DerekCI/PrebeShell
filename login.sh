@@ -33,10 +33,15 @@ elif test -z "$2"; then
 						clear
 						echo "Login correcto. Bienvenido $u "
 						sleep 2
+						let x=7
 						let valor=1
-						export valor
-						export u
-						./prompt.sh
+						#export valor
+						#export u
+						#./prompt.sh
+
+
+
+
 					else
 						echo "Tu contraseña es incorrecta, ciao"
 					fi
@@ -45,4 +50,11 @@ elif test -z "$2"; then
 	IFS=$dormir # Recupera el $IFS original
 			fi
 		done 
+fi
+
+if [[ x==7 ]]
+then
+	export valor
+	export u
+	./prompt.sh
 fi
