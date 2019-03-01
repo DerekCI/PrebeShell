@@ -4,51 +4,51 @@
 
 ayuda()
 {
-	echo 'Este comando te da la descripcion de cada comando'
+	#echo 'Esto da la descripcion de cada comando'
 
-	echo '¿De que comando quieres ayuda?'
-	echo '1)Login. 2)Fecha. 3)Hora. 4)Buscar. 5)Prompt. 6)PrebePlayer. 7)Tree. 8)Adivina Quien. 9)Cuadro Magico. 10)juegoPuertas. 11)Interfaz Crontab. 12)Ayuda. 13)Creditos.'
+	#echo '¿De que comando quieres ayuda?'
+	#echo '1)Login. 2)Fecha. 3)Hora. 4)Buscar. 5)Prompt. 6)PrebePlayer. 7)Tree. 8)Adivina Quien. 9)Cuadro Magico. 10)juegoPuertas. 11)Interfaz Crontab. 12)Ayuda. 13)Creditos.'
 	
-	case $1 in:
-		1)
+	case $1 in
+		login)
 			echo 'El comando login.sh es un sistema de acceso para los usuarios'
 		;;
-		2)
+		fecha)
 			echo 'El comando fecha.sh te muestra la fecha actual'
 		;;
-		3)
+		hora)
 			echo 'El comando hora.sh te muestra la hora actual'
 		;;
-		4)
+		buscar)
 			echo 'El comando buscar.sh busca un archivo especifico en un directorio especifico'
 		;;
-		5)
-			echo 'El comando prompt.sh'
+		prompt)
+			echo 'El prompt es lo que nos permitira interpretar nuestros comandos en la prebeSHell'
 		;;
-		6)
+		prebeplayer)
 			echo 'El prebeplayer.sh es un reproductor de musica'
 		;;
-		7)
+		tree)
 			echo 'El comando tree.sh te muestra tu directorio actual, y los que se encuentran en este directorio, con una amigable forma de arbol'
 		;;
-		8)
+		tree)
 			echo 'AdivinaQuien.sh es un juego en el que te hacen preguntas sobre tu Becario de Proteco favorito'
 		;;
-		9)
-			echo 'cuadromagico.sh'
+		adivinaquien)
+			echo 'cuadromagico.sh es un juego en el que debes tener la misma suma en cada fila, columna y diagonal'
 		;;
-		10)
+		juegopuertas)
 			echo 'juegoPuertas.sh es un juego donde tienes que adivinar la salida para ganar un dulce'
 		;;
-		11)
+		interfazcrontab)
 			echo 'El comando interfazCrontab.sh te permite asignar tareas a una hora y fecha especifica'
 		;;
-		12)
+		ayuda)
 			echo 'El comando ayuda.sh te muestra la descripcion de cualquier comando que quieras'
 		;;
-		13)
+		creditos)
 			echo 'El comando creditos.sh muestra a los creadores de esta prebeShell'
 		;;
 esac
 }
-switch $1
+ayuda $1
