@@ -1,11 +1,28 @@
 #!/bin/bash
-let intentos=3
-let solucion=$RANDOM%6
+
+fcyanama="\e[1;33;46m"
+fc="\e[49;0m"
+negro="\e[0;30m"
+azul="\e[0;34m"
+f="\e[0m"
+frojo="\e[41m"          ##codigos para poner colores
+famarillo="\e[43m"
+ff="\e[49m"
+
+colorear(){
+	echo -e $fcyanama$1$fc
+}
+
+let intentos=3 #Intentos para adivinar
+let solucion=$RANDOM%6	#aleatorio del 1 al 6
 clear
-echo "Tienes que encontrar la salida, solo hay una puerta que sale de la habitación donde estas"
-echo "Solo tienes $intentos vidas"
+figlet "		PUERTONAS"
+echo -e "${frojo}	Tienes que encontrar la salida, solo hay una puerta que sale de la habitación donde estas"
+	colorear "================================================================================"
+echo -e "\n${frojo} 		Solo tienes $intentos vidas"
+	colorear "================================================================================"
 printf "\n\n"
-echo "  1     2     3     4     5     6  "
+echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 echo " ___   ___   ___   ___   ___   ___ "
 echo "|  .| |  .| |  .| |  .| |  .| |  .|"
 echo "|   | |   | |   | |   | |   | |   |"
@@ -15,7 +32,7 @@ printf "\n\n\n"
 function abreBuena
 {
 	let numero--
-	echo "  1     2     3     4     5     6  "
+	echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 	echo " ___   ___   ___   ___   ___   ___ "
 	echo "|  .| |  .| |  .| |  .| |  .| |  .|"
 	echo "|   | |   | |   | |   | |   | |   |"
@@ -23,7 +40,7 @@ function abreBuena
 	sleep 2
 
 	printf "\n\n"
-	echo "  1     2     3     4     5     6  "
+	echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 	echo " ___   ___   ___   ___   ___   ___ "
 	for i in $(seq 1 $numero);do
 		printf "|  .| "
@@ -45,7 +62,7 @@ function abreBuena
 	sleep 2
 
 	printf "\n\n"
-	echo "  1     2     3     4     5     6  "
+	echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 	echo " ___   ___   ___   ___   ___   ___ "
 	for i in $(seq 1 $numero);do
 		printf "|  .| "
@@ -72,14 +89,14 @@ function abreBuena
 function abreMala
 {
 	let numero--
-	echo "  1     2     3     4     5     6  "
+	echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 	echo " ___   ___   ___   ___   ___   ___ "
 	echo "|  .| |  .| |  .| |  .| |  .| |  .|"
 	echo "|   | |   | |   | |   | |   | |   |"
 	echo " ---   ---   ---   ---   ---   --- "
 	sleep 2
 	printf "\n\n"
-	echo "  1     2     3     4     5     6  "
+	echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 	echo " ___   ___   ___   ___   ___   ___ "
 	for i in $(seq 1 $numero);do
 		printf "|  .| "
@@ -101,7 +118,7 @@ function abreMala
 
 	sleep 2
 	printf "\n\n"
-	echo "  1     2     3     4     5     6  "
+	echo -e "${famarillo}  1     2     3     4     5     6    ${ff}"
 	echo " ___   ___   ___   ___   ___   ___ "
 	for i in $(seq 1 $numero);do
 		printf "|  .| "
@@ -128,25 +145,25 @@ function abreMala
 
 while ((intentos!=0))
 do
-	#echo "$solucion"
 	read -p "Ingrese el número de la puerta que desee abrir: " numero ##read lee algo del prompt, con -p te permite poner mensaje
-	if ((numero==solucion));then
+	if ((numero==solucion));then #si encuentra la solucion se abreBuena
 		clear
 		abreBuena
 		exit
 	else
-		clear
+		clear #si no encuentra la solucion se abreMala
 		abreMala
 
 	fi
 	((intentos--))
 	if ((intentos==0));then
-		echo "----------PERDISTE----------"
+		echo -e "{frojo}----------PERDISTE----------" #si ya no hay intentos pierde
 		exit
 	fi
-	echo "¡Apestas, intenta de nuevo!"
-	printf "\n"
-	echo "Ahora solo tienes $intentos vidas"
+	echo "{frojo}¡Apestas, intenta de nuevo!${ff}"
+	printf "\n\n"
+	echo "{frojo}Ahora solo tienes $intentos vidas${ff}"
+	sleep 1
 done
 
 #sleep 1
