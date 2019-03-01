@@ -1,9 +1,13 @@
 #!/bin/bash
+trap 'exit' 2 20 #
+trap 'exit' SIGTSTP
 
 GREEN="\033[0;32m"
 NOCOLOR="\033[0m"
 
-if [ "$valor" = 1 ]
+let valor=1
+
+if [ "$valor"=1 ]
 then
 	clear
 	declare commandirri="hola"
@@ -11,21 +15,28 @@ then
 	while [[ $commandirri != "exit" ]]
 	do
 		printf "${GREEN}$u @prebeshell: ${NOCOLOR}"
-		read commandirri
-		if [ "$commandirri" != "hola" ]
+		#read commandirri
+		IFS="" read -r commandirri </dev/tty
+		if ! type foobar > /dev/null; then
+			"$commandirri"
+		elif [ "$commandirri" != "hola" ] #|| ! type foobar &> /dev/null ]
 		then
-			if [ -f "$commandirri".sh ]
+			if [ -f "${commandirri}.sh" ]
 			then
 				./"$commandirri".sh
 			else
+				#if [ ]
+				#then
+				#fi
 				echo "Ese comando no existe :c"
-			fi
-			if [ "$commandirri" = "exit" ]
-			then
-				echo "Bueno, vai"
+				if [ "$commandirri" = "exit" ]
+				then
+					echo "Bueno, vai"
+				fi
 			fi
 		fi
 	done
 else
 		echo "Usted no ha ingresado como usuario, ciao"
 fi
+
