@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 GREEN="\033[0;32m"
 NOCOLOR="\033[0m"
 
@@ -12,11 +14,13 @@ then
 	while [[ $commandirri != "exit" ]]
 	do
 		printf "${GREEN}$u @prebeshell: ${NOCOLOR}"
-		read commandirri
+		IFS=" " read commandirri parametro1 parametro2
 		if [ "$commandirri" != "hola" ]
 		then
 			if [ -f "$commandirri".sh ]
 			then
+				export parametro1
+				export parametro2
 				./"$commandirri".sh
 			else
 				echo "Ese comando no existe :c"
