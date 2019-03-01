@@ -36,5 +36,3 @@ else
 		echo "Usted no ha ingresado como usuario, ciao"
 fi
 
-fi
-
