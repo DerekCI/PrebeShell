@@ -157,12 +157,12 @@ do
 	fi
 	((intentos--))
 	if ((intentos==0));then
-		echo -e "{frojo}----------PERDISTE----------" #si ya no hay intentos pierde
+		echo -e "${frojo}----------PERDISTE----------" #si ya no hay intentos pierde
 		exit
 	fi
-	echo "{frojo}¡Apestas, intenta de nuevo!${ff}"
+	echo -e "${frojo}¡Apestas, intenta de nuevo!${ff}"
 	printf "\n\n"
-	echo "{frojo}Ahora solo tienes $intentos vidas${ff}"
+	echo -e "${frojo}Ahora solo tienes $intentos vidas${ff}"
 	sleep 1
 done
 
