@@ -13,7 +13,7 @@ let x=1   #Les recomiendo para calificar usar el valor de x=1 dónde el resultad
 #let x=$(( ( RANDOM % 100 )  + 1 ))
 let y=$x+8
 figlet "                 Bienvenido"
-printf "\t Ingresa los números del $x al $y en el recuadro de tal manera de \n\t todas las sumas horizontales, verticales y diagonales den el \n\t mismo resultado\n\n\n"
+printf "\t ${BLUE}Ingresa los números del $x al $y en el recuadro de tal manera de \n\t todas las sumas horizontales, verticales y diagonales den el \n\t mismo resultado ${NC}\n\n\n"
 sleep 2
 
 declare -A matrix
@@ -42,7 +42,7 @@ clear
 
 for ((m=1;m<=3;m++)) do #Para pedir al usuario un número en cada una de las posiciones, se hacen dos en para poder tener las posiciones como coordenadas del cuadro
     for ((n=1;n<=3;n++)) do
-    	printf "\t \t Ingrese un número para la posición $m,$n : "
+    		printf "\t \t ${BLUE}Ingrese un número para la posición $m,$n : ${NC}"
 		read num
 		printf "\n \n"
 		matrix[$n,$m]=$num #Cambia el valor de la posición de la matriz según el ingresado por el usuario
@@ -70,7 +70,10 @@ declare -i d2="$num13"+"$num22"+"num31"
 declare -i lineas=$h1+$h2+$h3 #Representa la suma de todos los números dentro del cuadro del usuario
 if (( $lineas==$magic && $linea==$h1 && $h1==$h2 && $h2==$h3 && $h3==$v1 && $v1==$v2 && $v3==$d1 && $d1==$d2)) #Revisa que cumpla todas las reglas del cuadro mágico
 then
-	printf "Ganaste \n"
+	figlet " Ganaste!"
+	cowsay "Felicidades"
 else
-	printf "Perdiste \n"
+	figlet "Perdiste "
+	cowsay "Suerte para la próxima"
 fi
+
