@@ -1,27 +1,4 @@
 #!/bin/bash
-#PREBEPLAYERLa interfaz gráfica de este reproductor
-#es de diseño libre, aunque debe incluir al menos una manera para 
-#navegar sobre la biblioteca musical, un área que muestre el status actual de 
-#la reproducción y una sección que indique al usuario cómo utilizar el programa.
-
-#Para hacer el prebeplayer, ustedes requerirán del programa mpg123, 
-#y harán la programación de esta parte basados en comandos para mpg123.
-# Sin embargo, al principio de la ejecución de la terminal, esta debe revisar
-# si el programa está instalado y realizar la instalación si es que el usuario no lo tiene.
-#Si está instalado, simplemente no se muestra nada al inicio de la ejecución de la terminal. Extra
-#abrecanciones(){
-	#find . -type f -name "*.mp3" | xargs grep "*.mp3"
-#}
-
-    # Negro = 0;30    Gris oscuro = 1;30    Azul = 0;34    Azul claro = 1;34    Verde = 0;32    Verde claro = 1;32    Cyan = 0;36
-    # Cyan claro = 1;36    Rojo = 0;31    Rojo claro = 1;31    Púrpura = 0;35    Púrpura claro = 1;35    Café = 0;33    Amarillo = 1;33
-    # Gris = 0;37    Blanco = 1;37
-#                                          ‘\e[CODIGOm(texto)\e[0m’ (el texto sin los paréntesis)
-
-
-   # Negro = 40    Rojo = 41    Verde = 42    Amarillo = 43    Azul = 44    Rosa = 45    Cyan = 46    Blanco = 47
-   # echo -e "\e[42mMuestra\e[49m"
-
 
 negro="\e[0;30m"
 azul="\e[0;34m"
@@ -59,44 +36,38 @@ showMenu(){
 	echo -e "${fcyanama}||${fcyanama2}                               ${fcyanama}||${fcyanama2}      -      |      +        ${fcyanama}||"
 	echo -e "${fcyanama}||${fcyanama2}    (q) <---Menu inicial       ${fcyanama}||${fcyanama2}   Baja      |   Sube        ${fcyanama}||"
 	echo -e "${fcyanama}||${fcyanama2}    album = $album             ${fcyanama}||${fcyanama2}   Volumen   |   Volumen     ${fcyanama}||$fc"
-	echo -e "${fcyanama}||${fcyanama2}    cancion = $actual          ${fcyanama}||${fcyanama2}             |               ${fcyanama}||"
-	echo -e "${fcyanama}||${fcyanama2}                               ${fcyanama}||${fcyanama2}             |               ${fcyanama}||"
 	colorear "=================================================================="
+	echo -e "${fcyanama2}    cancion = $actual"          
+	colorear "==================================================================" ##MENU cuando se reproduce cancion
 }
 
 iniciaRep(){
-	while [[ $salido -eq 0 ]]; do
+	while [[ $salido -eq 0 ]]; do  ##Salido es para saber cuando el usuario quiere salir
 		clear
 	cd "Musica" #Debe de iniciarse el programa donde esta la carpeta musica
 	titulo
 	colorear "=================================================================="
-	echo -e "${fcyanama}||$fc   ${fcyanama2}Escoge las opciones:     $fc                                  ${fcyanama}||"
+	echo -e "${fcyanama}||$fc   ${fcyanama2}Escoge las opciones:     $fc                                  ${fcyanama}||" #Este es el menu principal
 	colorear "=================================================================="
 	echo -e "${fcyanama}||$fc   ${fcyanama2}1) Ver albums disponibles$fc                                  ${fcyanama}||"
 	echo -e "${fcyanama}||$fc   ${fcyanama2}2) Reproducir aleatorio  $fc                                  ${fcyanama}||"
 	echo -e "${fcyanama}||$fc   ${fcyanama2}3) Salir del reproductor $fc                                  ${fcyanama}||"
-	#echo "||1) Ver albums disponibles"
-	#echo "||2) Reproducir aleatorio"
-	#echo "||3) Salir del reproductor"
 	colorear "=================================================================="
-	#figlet "============="
 	read opcion
 	clear
 	titulo
-	case $opcion in
+	case $opcion in #Opciones del menu principal
 		1)
 			colorear "=================================================================="
 			printf "${fcyanama2}                     Estos son los albums:                        ${fcyanama2}\n"
-			#printf "Estos son los albums:\n"
 			colorear "=================================================================="
 			printf "${fcyanama2}\n\n"
-			ls -F | grep "/$" 
+			ls -F | grep "/$" #muestra los archivos
 			printf "\n"
 			colorear "=================================================================="
 			printf "${fcyanama2}                     Escribe el nombre del album:                 ${fc}\n"
 			read album
 			cd $album
-			#find . -type f -name "*.mp3" | xargs grep "*.mp3"
 			clear
 			titulo
 			colorear "=================================================================="
@@ -109,7 +80,6 @@ iniciaRep(){
 			printf "\n\n$fc"
 			colorear "=================================================================="
 			printf "${fcyanama2}                     Escribe R o r para reproducir album          \n"
-			#echo "Escribe R o r para reproducir album"
 			read tecla
 			case $tecla in
 				R|r )
@@ -122,18 +92,10 @@ iniciaRep(){
     					echo "$f" > cancionahorita
     					clear
 						titulo
-						#actual= cat cancionahorita ## | grep "*\.mp3"
-						grep "mp3" cancionahorita
-						actual=$(grep -e "\/([a-Z])*\.mp3" cancionahorita)
-						echo "dad"
-						echo $actual
+						actual=$(grep ".mp3" cancionahorita)
 						showMenu
-						#grep "*\.mp3" cancionahorita
-						#actual= grep "*\.mp3" cancionahorita
-						#echo "$actual"
-	    				mpg123 -q "$f" # maybe redirect stdout / stderr?
+	    				mpg123 -q "$f" ##Reproduce el .mp3 actual 
 					done
-					#mpg123 -q  --continue *.mp3 
 
 					clear
 					cd ..
@@ -141,7 +103,7 @@ iniciaRep(){
 					;;
 			esac
 			;;
-		2)
+		2) ##Para reproducir una cancion aleatoria de un album aleatorio
 			num=0
 			ls -F | grep "/$">lista.txt
 			for i in $PWD/* ##checa todo lo que tiene dentro del directorio
@@ -153,34 +115,23 @@ iniciaRep(){
 
 			let ran=$RANDOM%num
 			let ran=ran+1
-			#printf $ran
 			album=$(sed -n ${ran}p lista.txt)
 			cd $album
-			#find . -type f -name "*.mp3" | xargs grep "*.mp3"
 			clear
 			titulo
 			printf "Canciones en el album $album\n\n"
 			ls | grep "mp3$"
 			printf "\n\n"
-			#echo "Presiona R o r para reproducir album"
-			#read tecla
-			#case $tecla in
-			#	R|r )
-					clear
-					titulo
-					showMenu
-					mpg123 -q *.mp3 
-					clear	
-					cd ..
-					cd ..
-			#		;;
-			#	*)
-			#		echo "Escribe bien :P"
-			#		;;
-			#esac
+			clear
+			titulo
+			showMenu
+			mpg123 -q *.mp3 
+			clear	
+			cd ..
+			cd ..
 			;;
 		3)
-			figlet "Estas SEGURO?       S / N"
+			figlet "Estas SEGURO?       S / N" #Para salir
 			read dec
 			case $dec in
 				S|s )
@@ -200,28 +151,31 @@ iniciaRep(){
 	esac
 		done
 }
+
 #Verificar si el programa existe
-sudo apt-get install mpg123
+dpkg --get-selections>instalaciones  ##escribe los paquetes que tenemos
+if [ $(egrep -c "mpg123" instalaciones) -eq 0 ] ##Si no se encuentra
+then
+	echo "Desea instalar?"
+	read dec
+			case $dec in
+				S|s )
+					sudo apt-get install mpg123
+					iniciaRep
+					;;
+				N|n )
+					echo "Wueno, no quieres escuchar a mi bebecita brrrr!"
+					sleep 1
+					;;
+				*)
+					echo "Escribe bien :P"
+					;;
+			esac
 
-#programa
-
-iniciaRep
-
-#let num=1
-#echo >"listaAlbum.txt"
-#for i in $PWD/* ##checa todo lo que tiene dentro del directorio
-#	do
-#			if [ -d "$i" ];then 
-#				echo "$num \"$i\"">>"listaAlbum.txt"
-#				
-#				let num=num+1
-#			fi
-#	done
-#lista=$(cat listaAlbum.txt)
-#echo $lista
+else
+	#echo "$(egrep -c "mpg123" instalaciones)"
+	sleep 1
+	iniciaRep
+fi
 
 
-#grep '[A-z]+"' listaAlbum.txt>
-#sed -e 's/(\/.*[A-z]+\/Musica\/)//g' "listaAlbum.txt">"listaAlbum.txt"
-#dialog --title "PREBEPLAYER" --msgbox 'Hola Sololinux!' 6 20
-#dialog --begin 10 20 --backtitle "PREBEPLAYER" --title "About" --msgbox 'Pese a que muchos les fastidie, el conocimiento debe ser libre y gratuito.' 10 30
