@@ -12,7 +12,7 @@ read -p "¿En que minuto en especifico?" min
 cls 									##Limpia pantalla
 echo "Ahora, para finalizar... "
 sleep 1
-read -p "Ingrese las instrucciones que quieres hacer " comando  
+read -p "Ingresa el comando " comando  
 echo "$min $hora $dia $mes $diasemana	root $comando" >>/etc/crontab ##Redirecciona los parametros y el comando hacia el crontab
 
 echo "Hecho "
