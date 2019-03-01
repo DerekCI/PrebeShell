@@ -1,17 +1,9 @@
 #!/bin/bash
 
-    # Negro = 0;30    Gris oscuro = 1;30    Azul = 0;34    Azul claro = 1;34    Verde = 0;32    Verde claro = 1;32    Cyan = 0;36
-    # Cyan claro = 1;36    Rojo = 0;31    Rojo claro = 1;31    Púrpura = 0;35    Púrpura claro = 1;35    Café = 0;33    Amarillo = 1;33
-    # Gris = 0;37    Blanco = 1;37
-#                                          ‘\e[CODIGOm(texto)\e[0m’ (el texto sin los paréntesis)
 
-
-   # Negro = 40    Rojo = 41    Verde = 42    Amarillo = 43    Azul = 44    Rosa = 45    Cyan = 46    Blanco = 47
-   # echo -e "\e[42mMuestra\e[49m"
 
 fcyanama1="\e[1;33;46m"
 fc="\e[49;0m"
-printf "${fcyanama1}hola$fc"
 negro="\e[0;30m"
 azul="\e[0;34m"
 f="\e[0m"
@@ -38,5 +30,7 @@ buscar()
 
 }
 
+
 buscar $1 $2
+
 
