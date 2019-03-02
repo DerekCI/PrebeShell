@@ -13,8 +13,11 @@ cls 									##Limpia pantalla
 echo "Ahora, para finalizar... "
 sleep 1
 read -p "Ingresa el comando " comando  
-echo "$min $hora $dia $mes $diasemana	root $comando" >>/etc/crontab ##Redirecciona los parametros y el comando hacia el crontab
 
+crontab -l >  contrab.lst
+echo "$min $hora $dia $mes $diasemana	root $comando" >> crontab.lst ##Redirecciona los parametros y el comando hacia el crontab
+
+crontab crontab.lst
 echo "Hecho "
 
 
