@@ -9,7 +9,7 @@ read -p "¿Que mes? (en numero)" mes
 read -p "¿Que dia del mes? " dia
 read -p "¿A que hora? " hora
 read -p "¿En que minuto en especifico?" min
-cls 									##Limpia pantalla
+clear 								##Limpia pantalla
 echo "Ahora, para finalizar... "
 sleep 1
 read -p "Ingresa el comando " comando  
